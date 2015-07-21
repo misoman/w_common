@@ -11,3 +11,7 @@ cookbook 'firewall', "~> 1.4.0"
 cookbook 'ntp'
 cookbook 'sudo'
 cookbook 'timezone-ii'
+
+group :wrapper do
+  cookbook 'w_common', path: './'
+end
