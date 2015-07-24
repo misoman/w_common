@@ -14,7 +14,6 @@ include_recipe 'w_common::users'
 include_recipe 'ntp'
 include_recipe 'timezone-ii'
 
-include_recipe 'vmware-tools::default' if node['w_common']['vmware-tools_enabled']
 include_recipe 'w_common::hosts'
 
 

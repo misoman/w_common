@@ -2,7 +2,7 @@ require_relative '../spec_helper'
 
 describe 'w_common::default' do
 
-  context 'with vmware tools disabled' do
+  context 'default' do
 
   	let(:bash_code) do
  <<-EOH
@@ -17,7 +17,6 @@ describe 'w_common::default' do
 
 	  let(:chef_run) do
 	    ChefSpec::SoloRunner.new(file_cache_path: '/var/chef/cache') do |node|
-	      node.set['w_common']['vmware-tools_enabled'] = false
 	      node.set['tz'] = 'America/Los_Angeles'
 	      node.set['apt']['compile_time_update'] = true
 	    	varnish = {

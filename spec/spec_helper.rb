@@ -3,7 +3,6 @@ require 'chefspec/berkshelf'
 require 'mymatchers'
 
 ChefSpec::Coverage.start! do
-  add_filter(%r{/vmware-tools/})
   add_filter(%r{/ntp/})
   add_filter(%r{/sudo/})
   add_filter(%r{/timezone-ii/})
