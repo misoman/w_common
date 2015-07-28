@@ -11,7 +11,7 @@ env:
     - CHEF_VERSION=12.2.1
     - CHEF_VERSION=12.3.0
 before_script:
-  - "bundle-audit update"
+  - "gem install bundler-audit --no-rdoc --no-ri && bundle-audit update"
 script:
   - bundle-audit check
   - bundle exec rake foodcritic

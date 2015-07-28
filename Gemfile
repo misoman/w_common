@@ -10,7 +10,6 @@ gem 'foodcritic'
 gem 'rake'
 gem 'rubocop'
 gem 'byebug'
-gem 'bundler-audit'
 
 group :integration do
   gem 'serverspec'
