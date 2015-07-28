@@ -7,6 +7,7 @@ package 'bash' do
 end
 
 package 'curl'
+package 'telnet'
 
 include_recipe 'sudo'
 include_recipe 'hostname'
