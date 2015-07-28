@@ -18,6 +18,8 @@ describe 'w_common::default' do
 	  let(:chef_run) do
 	    ChefSpec::SoloRunner.new(file_cache_path: '/var/chef/cache') do |node|
 	      node.set['tz'] = 'America/Los_Angeles'
+	      node.name 'node1'
+	      node.set['set_fqdn'] = '*.examplewebsite.com'
 	      node.set['apt']['compile_time_update'] = true
 	    	varnish = {
 	         "purge_target" => true
@@ -75,10 +77,14 @@ describe 'w_common::default' do
 			expect(chef_run).to install_package('curl')
 		end
 
-	  it 'runs following recipes: sudo, ntp, timezone' do
-	    expect(chef_run).to include_recipe('sudo')
-	    expect(chef_run).to include_recipe('ntp')
-	    expect(chef_run).to include_recipe('timezone-ii')
+		it 'configures sudo' do
+			expect(chef_run).to include_recipe('sudo')
+		end
+
+	  it 'configures hostname' do
+	  	expect(chef_run).to include_recipe('hostname')
+	  	expect(chef_run).to render_file('/etc/hostname').with_content('node1')
+	  	expect(chef_run).to run_execute('hostname node1')
 	  end
 
 	  it 'enable ufw and open port 22 for ssh' do
@@ -86,7 +92,9 @@ describe 'w_common::default' do
 	  	expect(chef_run).to allow_firewall_rule('ssh').with_port(22)
 	  end
 
-		it 'renders /etc/timezone' do
+		it 'configures ntp and imezone' do
+			expect(chef_run).to include_recipe('ntp')
+			expect(chef_run).to include_recipe('timezone-ii')
 			expect(chef_run).to render_file('/etc/timezone').with_content('America/Los_Angeles')
 		end
 	end
