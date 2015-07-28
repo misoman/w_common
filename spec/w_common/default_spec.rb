@@ -77,6 +77,10 @@ describe 'w_common::default' do
 			expect(chef_run).to install_package('curl')
 		end
 
+		it 'installs telnet' do
+			expect(chef_run).to install_package('telnet')
+		end
+
 		it 'configures sudo' do
 			expect(chef_run).to include_recipe('sudo')
 		end

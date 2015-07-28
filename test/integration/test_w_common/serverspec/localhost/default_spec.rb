@@ -9,6 +9,10 @@ describe 'w_comman::default' do
 	  it { should be_installed }
 	end
 
+  describe package('telnet') do
+    it { should be_installed }
+  end
+
   if os[:family] == 'ubuntu' && os[:release] == '12.04'
     describe file('/etc/hostname') do
       it { should exist }
