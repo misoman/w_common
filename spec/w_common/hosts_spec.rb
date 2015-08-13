@@ -19,7 +19,8 @@ describe 'w_common::hosts' do
 	         "connection_domain" => {
 	                 "db_domain" => "db.example.com",
 	                 "webapp_domain" => "webapp.example.com",
-	                 "varnish_domain" => "varnish.example.com"
+	                 "varnish_domain" => "varnish.example.com",
+	                 "chefserver_domain" => "chefserver.example.com"
 	                },
 	         "mysql" =>  [
 	                 {"db" => "dbname", "user" => "username", "password" => "password"},
@@ -30,7 +31,8 @@ describe 'w_common::hosts' do
 				]
 				node.set['dbhosts'] = {
 	        "db_ip" => ["2.2.2.2"],
-	        "webapp_ip" => ["1.1.1.1"]
+	        "webapp_ip" => ["1.1.1.1"],
+	        "chefserver_ip" => "0.0.0.0"
 				}
 	    end.converge(described_recipe)
 	  end
@@ -38,6 +40,7 @@ describe 'w_common::hosts' do
 	  it 'generates /etc/hosts file entries to enable communication btw web and db server' do
 	  	expect(chef_run).to append_hostsfile_entry('1.1.1.1').with_hostname('0webapp.example.com').with_unique(true)
 	  	expect(chef_run).to append_hostsfile_entry('2.2.2.2').with_hostname('0db.example.com').with_unique(true)
+	  	expect(chef_run).to append_hostsfile_entry('0.0.0.0').with_hostname('chefserver.example.com').with_unique(true)
 	  	expect(chef_run).to append_hostsfile_entry('127.0.0.1').with_hostname('localhost').with_unique(true)
 	  end
 

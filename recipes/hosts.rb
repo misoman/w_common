@@ -36,6 +36,13 @@ node['w_common']['web_apps'].each do |web_app|
       unique true
     end
   end
+  
+  hostsfile_entry node['dbhosts']['chefserver_ip'] do
+    hostname web_app['connection_domain']['chefserver_domain']
+    action :append
+    unique true
+  end
+  
 end
 
 hostsfile_entry '127.0.0.1' do
