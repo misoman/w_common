@@ -18,12 +18,9 @@ include_recipe 'timezone-ii'
 
 include_recipe 'w_common::hosts' if node['w_common']['ha_connecction']
 
-firewall 'ufw' do
-  action :enable
-end
+firewall 'default'
 
 firewall_rule 'ssh' do
   port     22
   protocol :tcp
-  action   :allow
 end

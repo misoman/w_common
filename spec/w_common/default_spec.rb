@@ -93,9 +93,9 @@ describe 'w_common::default' do
 	  	expect(chef_run).to run_execute('hostname node1')
 	  end
 
-	  it 'enable ufw and open port 22 for ssh' do
-	  	expect(chef_run).to enable_firewall('ufw')
-	  	expect(chef_run).to allow_firewall_rule('ssh').with_port(22)
+	  it 'enable default firewall (ufw) and open port 22 for ssh' do
+	  	expect(chef_run).to install_firewall('default')
+	  	expect(chef_run).to create_firewall_rule('ssh').with_port(22)
 	  end
 
 		it 'configures ntp and imezone' do
