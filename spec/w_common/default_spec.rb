@@ -34,8 +34,7 @@ describe 'w_common::default' do
 	         "connection_domain" => {
 	                 "db_domain" => "db.example.com",
 	                 "webapp_domain" => "webapp.example.com",
-	                 "varnish_domain" => "varnish.example.com",
-	                 "chefserver_domain" => "chefserver.example.com"
+	                 "varnish_domain" => "varnish.example.com"
 	                },
 	         "mysql" =>  [
 	                 {"db" => "dbname", "user" => "username", "password" => "password"},
@@ -46,8 +45,11 @@ describe 'w_common::default' do
 				]
 				node.set['dbhosts'] = {
 	        "db_ip" => ["2.2.2.2"],
-	        "webapp_ip" => ["1.1.1.1"],
-	        "chefserver_ip" => "0.0.0.0"
+	        "webapp_ip" => ["1.1.1.1"]
+				}
+				node.set['chefserver'] = {
+					"hostname" => "chefserver.example.com",
+					"ip" => "0.0.0.0"
 				}
 	    end.converge(described_recipe)
 		end
