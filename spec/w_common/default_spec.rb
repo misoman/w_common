@@ -21,6 +21,7 @@ describe 'w_common::default' do
 	      node.name 'node1'
 	      node.set['set_fqdn'] = '*.examplewebsite.com'
 	      node.set['apt']['compile_time_update'] = true
+	    	node.set['firewall']['allow_ssh'] = true
 	    	varnish = {
 	         "purge_target" => true
 	          }
@@ -96,8 +97,8 @@ describe 'w_common::default' do
 	  end
 
 	  it 'enable default firewall (ufw) and open port 22 for ssh' do
-	  	expect(chef_run).to install_firewall('default')
-	  	expect(chef_run).to create_firewall_rule('ssh').with_port(22)
+	  	expect(chef_run).to include_recipe('firewall')
+	  	expect(chef_run).to create_firewall_rule('allow world to ssh').with(port: 22, source: '0.0.0.0/0')
 	  end
 
 		it 'configures ntp and imezone' do
