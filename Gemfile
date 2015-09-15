@@ -5,6 +5,7 @@ chef_version = ENV.fetch("CHEF_VERSION", "12.3.0")
 gem "chef", "~> #{chef_version}"
 gem 'chefspec'
 gem 'chef-zero'
+gem 'chef-sugar'
 gem 'berkshelf'
 gem 'foodcritic'
 gem 'rake'

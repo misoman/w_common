@@ -12,7 +12,7 @@ hostsfile_entry node['chefserver']['ip'] do
 end
 
 # commom operation among web and db (mysql, percona, maria db cluster)
-if node.role?('w_apache_role') || node.role?('w_mysql_role') || node.role?('w_percona_role') then
+if node.role?('w_apache_role') || node.role?('w_mysql_role') || node.role?('w_percona_role') || node.chef_environment == "testkitchen" then
 
   Chef::Log.info("this node apache or db. start configureing hostsfile entry for connection btwn them")
 
