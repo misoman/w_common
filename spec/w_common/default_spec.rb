@@ -22,6 +22,7 @@ describe 'w_common::default' do
 	      node.set['set_fqdn'] = '*.examplewebsite.com'
 	      node.set['apt']['compile_time_update'] = true
 	    	node.set['firewall']['allow_ssh'] = true
+	    	node.set['monit_enabled'] = true
 	    	varnish = {
 	         "purge_target" => true
 	          }
@@ -96,15 +97,19 @@ describe 'w_common::default' do
 	  	expect(chef_run).to run_execute('hostname node1')
 	  end
 
-	  it 'enable default firewall (ufw) and open port 22 for ssh' do
-	  	expect(chef_run).to include_recipe('firewall')
-	  	expect(chef_run).to create_firewall_rule('allow world to ssh').with(port: 22, source: '0.0.0.0/0')
-	  end
-
 		it 'configures ntp and imezone' do
 			expect(chef_run).to include_recipe('ntp')
 			expect(chef_run).to include_recipe('timezone-ii')
 			expect(chef_run).to render_file('/etc/timezone').with_content('America/Los_Angeles')
 		end
+
+	  it 'enable default firewall (ufw) and open port 22 for ssh' do
+	  	expect(chef_run).to include_recipe('firewall')
+	  	expect(chef_run).to create_firewall_rule('allow world to ssh').with(port: 22, source: '0.0.0.0/0')
+	  end
+
+	  it 'enable firewall rule to allow monit httpd port' do
+	  	expect(chef_run).to create_firewall_rule('monit httpd').with_port(2812)
+	  end
 	end
 end

@@ -19,3 +19,9 @@ include_recipe 'timezone-ii'
 include_recipe 'w_common::hosts' if node['w_common']['ha_connecction']
 
 include_recipe 'firewall'
+
+if node['monit_enabled'] then
+  firewall_rule 'monit httpd' do
+    port  2812
+  end
+end
