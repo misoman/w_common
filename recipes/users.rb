@@ -1,21 +1,19 @@
 admins = data_bag('w_common')
 
-group 'admin' do
-	gid 111
-end
+group 'admin'
 
 admins.each do |login|
   userdata = data_bag_item('w_common', login)
   home = "/home/#{login}"
-	
+
 	if userdata['admin'] == true then
 	  user(login) do
-	  	gid 111
+	  	gid Mixlib::ShellOut.new('getent group admin | cut -d: -f3').run_command.stdout.to_i
 	  	shell '/bin/bash'
 	  	home      home
 	    supports  :manage_home => true
 	  end
-	  
+
 	  directory "#{home}/.ssh" do
 			mode '0700'
 			owner login
@@ -27,16 +25,16 @@ admins.each do |login|
 			mode '0600'
 			owner login
 			group 'admin'
-			content userdata['ssh_public_key']		
+			content userdata['ssh_public_key']
 		end
-		
+
 	else
 	  user(login) do
 	  	shell '/bin/sh'
 	  	home      home
 	    supports  :manage_home => true
 	  end
-	  
+
 	  directory "#{home}/.ssh" do
 			mode '0700'
 			owner login
@@ -48,7 +46,7 @@ admins.each do |login|
 			mode '0600'
 			owner login
 			group login
-			content userdata['ssh_public_key']		
-		end	  
-	end	
+			content userdata['ssh_public_key']
+		end
+	end
 end
