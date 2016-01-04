@@ -4,27 +4,28 @@
   "chef_type": "role",
   "default_attributes": {
     "w_common": {
-      "vmware-tools_enabled": false,
       "web_apps": [
         {
           "vhost": {
-            "main_domain": "examplewebsite.com",
-            "aliases": ["www.examplewebsite.com"]
+            "main_domain": "example.com",
+            "aliases": ["www.example.com", "ex.com"],
+            "docroot": "/websites/example.com/www"
           },
           "deploy": {
             "repo_ip": "9.9.9.9",
             "repo_domain": "git.examplewebsite.com",
+            "repo_path": "/websites/example.com",
             "repo_url": "https://git.examplewebsite.com/www.git"
           },
           "connection_domain": {
-            "db_domain": "db.examplewebsite.com",
-            "webapp_domain": "webapp.examplewebsite.com",
-            "varnish_domain": "varnish.examplewebsite.com"
+            "webapp_domain": "webapp.example.com",
+            "db_domain": "db.example.com",
+            "varnish_domain": "varnish.example.com"
           },
           "mysql": {
-            "db": "ex_db",
-            "user": "ex_user",
-            "password": "ex_pw"
+            "db": "db",
+            "user": "user",
+            "password": "password"
           },
           "varnish": {
             "purge_target": true
@@ -32,28 +33,45 @@
         },
         {
           "vhost": {
-            "docroot": "examplewebsite.com/admin",
-            "main_domain": "admin.examplewebsite.com",
-            "aliases": ["admin.examplewebsite.com"]
+            "main_domain": "example2.com",
+            "docroot": "/websites/example2.com/sub"
           },
           "deploy": {
-            "repo_url": "https://git.examplewebsite.com/admin.git"
+            "repo_ip": "9.9.9.9",
+            "repo_domain": "git.examplewebsite.com",
+            "repo_path": "/websites/example2.com",
+            "repo_url": "https://git.examplewebsite.com/www2.git"
           },
           "connection_domain": {
-            "db_domain": "db.examplewebsite.com",
-            "webapp_domain": "webapp.examplewebsite.com",
-            "varnish_domain": "varnish.examplewebsite.com"
+            "webapp_domain": "webapp.example.com",
+            "db_domain": "db.example.com"
           },
-          "mysql": [
-            { "db": "ex_admin_db_1",
-              "user": "ex_admin_user_1",
-              "password": "ex_admin_pw_1"
-            },
-            { "db": "ex_admin_db_2",
-              "user": "ex_admin_user_2",
-              "password": "ex_admin_pw_1"
-            }
-          ]
+          "mysql": {
+            "db": ["db2", "db3", "db4"],
+            "user": "user",
+            "password": "password"
+          }
+        },
+        {
+          "vhost": {
+            "main_domain": "example3.com",
+            "docroot": "/websites/example3.com/sub"
+          },
+          "connection_domain": {
+            "webapp_domain": "webapp.example.com",
+            "db_domain": "db.example.com"
+          },
+          "mysql": {
+            "db": ["db2", "db3", "db4"],
+            "user": "user",
+            "password": "password"
+          }
+        },
+        {
+          "vhost": {
+            "main_domain": "docroot-only-vhost.com",
+            "docroot": "/websites/dov"
+          }
         }
       ]
     }
