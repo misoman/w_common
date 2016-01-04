@@ -12,7 +12,7 @@ package 'telnet'
 include_recipe 'sudo'
 include_recipe 'hostname'
 include_recipe 'w_common::users' if node['w_common']['set_users']
-# user recipe needs to be executed before ntp because ntp create group ntp with git 111
+# user recipe needs to be executed before ntp because ntp create group ntp with gid 111
 include_recipe 'ntp'
 include_recipe 'timezone-ii'
 
