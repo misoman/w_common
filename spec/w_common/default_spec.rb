@@ -23,28 +23,7 @@ describe 'w_common::default' do
         node.set['apt']['compile_time_update'] = true
         node.set['firewall']['allow_ssh'] = true
         node.set['monit_enabled'] = true
-        varnish = {
-           "purge_target" => true
-            }
-
-        node.set['w_common']['web_apps'] = [
-          {"vhost" => {
-                  "main_domain" => "example.com",
-                  "aliases" => ['www.example.com', 'ex.com'],
-                  "docroot" => "www"
-                  },
-           "connection_domain" => {
-                   "db_domain" => "db.example.com",
-                   "webapp_domain" => "webapp.example.com",
-                   "varnish_domain" => "varnish.example.com"
-                  },
-           "mysql" =>  [
-                   {"db" => "dbname", "user" => "username", "password" => "password"},
-                   {"db" => "dbname2", "user" => "username2", "password" => "password2"}
-                   ],
-           "varnish" => varnish
-          }
-        ]
+        node.set['w_common']['web_apps'] = web_apps
         node.set['dbhosts'] = {
           "db_ip" => ["2.2.2.2"],
           "webapp_ip" => ["1.1.1.1"]
