@@ -41,6 +41,7 @@ if node.role?('w_apache_role') || node.role?('w_mysql_role') || node.role?('w_pe
     webapp_ips.each_with_index do |webapp_ip, index|
       domain = index.to_s + web_app['connection_domain']['webapp_domain']
       hostsfile_entry "#{webapp_ip} for #{web_app['vhost']['main_domain']}" do
+        ip_address webapp_ip
         hostname domain
         action :append
         unique true
@@ -50,6 +51,7 @@ if node.role?('w_apache_role') || node.role?('w_mysql_role') || node.role?('w_pe
     db_ips.each_with_index do |db_ip, index|
       domain = index.to_s + web_app['connection_domain']['db_domain']
       hostsfile_entry "#{db_ip} for #{web_app['vhost']['main_domain']}" do
+        ip_address db_ip
         hostname domain
         action :append
         unique true
