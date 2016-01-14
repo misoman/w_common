@@ -20,7 +20,7 @@ describe 'w_common::users' do
       expect(chef_run).to create_group('admin')
     end
 
-    it 'creates user charlie as admin with ssh public key' do
+    it 'creates user charlie as admin' do
       expect(chef_run).to create_user('charlie').with(group: 'admin', shell: '/bin/bash', home: '/home/charlie', supports: {:manage_home => true})
     end
 
@@ -47,7 +47,7 @@ describe 'w_common::users' do
       stub_command("which sudo").and_return(true)
     end
 
-    it 'creates user charlie2 as normal user with ssh public key' do
+    it 'creates user charlie2 as normal user' do
       expect(chef_run).to create_user('charlie2').with(shell: '/bin/sh', home: '/home/charlie2', supports: {:manage_home => true})
     end
 
