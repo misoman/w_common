@@ -68,6 +68,10 @@ describe 'w_common::default' do
 
     it 'configures sudo' do
       expect(chef_run).to include_recipe('sudo')
+      expect(chef_run).to render_file('/etc/sudoers').with_content{|content|
+        expect(content).to include('vagrant ALL=(ALL) NOPASSWD:ALL')
+        expect(content).to include('%admin ALL=(ALL) NOPASSWD:ALL')
+      }
     end
 
     it 'configures hostname' do

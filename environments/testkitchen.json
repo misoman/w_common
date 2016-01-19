@@ -25,6 +25,10 @@
         "password": "alert_password"
       }
     },
+    "chefserver": {
+      "ip": "172.31.0.11",
+      "hostname": "chefserver.examplechefserver.com"
+    },
     "dbhosts": {
       "db_ip": ["172.31.6.12"],
       "webapp_ip": ["172.31.3.12"]
