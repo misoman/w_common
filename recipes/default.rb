@@ -15,7 +15,7 @@ include_recipe 'w_common::users' if node['w_common']['set_users']
 # user recipe needs to be executed before ntp because ntp create group ntp with gid 111
 include_recipe 'ntp'
 include_recipe 'timezone-ii'
-
+include_recipe 'w_common::newrelic_server' if node['w_common']['newrelic_server_enabled']
 include_recipe 'w_common::hosts' if node['w_common']['ha_connecction']
 
 include_recipe 'firewall'

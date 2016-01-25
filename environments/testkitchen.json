@@ -32,6 +32,9 @@
     "dbhosts": {
       "db_ip": ["172.31.6.12"],
       "webapp_ip": ["172.31.3.12"]
+    },
+    "w_common": {
+      "newrelic_server_enabled": true
     }
   }
 }
