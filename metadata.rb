@@ -4,7 +4,7 @@ maintainer_email 'joelhandwell@gmail.com'
 license          'apachev2'
 description      'Installs/Configures common components among all virtual machines'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.3.8'
+version          '0.3.9'
 
 depends 'apt'
 depends 'sudo'
@@ -13,3 +13,4 @@ depends 'timezone-ii'
 depends 'firewall'
 depends 'hostsfile'
 depends 'hostname'
+depends 'newrelic'

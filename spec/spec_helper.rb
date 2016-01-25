@@ -14,6 +14,7 @@ ChefSpec::Coverage.start! do
   add_filter(%r{hostname})
   add_filter(%r{firewall})
   add_filter(%r{chef-sugar})
+  add_filter(%r{newrelic})
  end
 
 RSpec.configure do |config|

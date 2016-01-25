@@ -10,3 +10,5 @@ default['apt']['compile_time_update'] = true
 default['firewall']['allow_ssh'] = true
 default['w_common']['ha_connecction'] = true
 default['w_common']['set_users'] = true
+default['w_common']['newrelic_server_enabled'] = false
+default['w_common']['newrelic_server_actions'] = %w(enable start)
