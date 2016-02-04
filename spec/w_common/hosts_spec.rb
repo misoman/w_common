@@ -4,10 +4,6 @@ describe 'w_common::hosts' do
 
   context 'default configuration' do
 
-    let(:run_list_items){
-      Chef::RunList.new('role[w_mysql_role]')
-    }
-
     let(:chef_run) do
       ChefSpec::SoloRunner.new do |node|
         node.set['w_common']['web_apps'] = web_apps
@@ -20,13 +16,8 @@ describe 'w_common::hosts' do
           "hostname" => "chefserver.example.com",
           "ip" => "0.0.0.0"
         }
-
-        allow(node).to receive(:role?).with('w_apache_role').and_return(false)
-        allow(node).to receive(:role?).with('w_mysql_role').and_return(true)
-        allow(node).to receive(:role?).with('w_percona_role').and_return(false)
       end.converge(described_recipe)
     end
-
 
     it 'generates /etc/hosts file entry for default localhost' do
       expect(chef_run).to append_hostsfile_entry('127.0.0.1').with_hostname('localhost').with(unique: true)
