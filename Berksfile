@@ -12,6 +12,7 @@ cookbook 'ntp'
 cookbook 'sudo'
 cookbook 'timezone-ii'
 cookbook 'windows', git: 'https://github.com/opscode-cookbooks/windows.git', ref: '0dae7405020b1521b61170267fdeedc022c3a448'
+cookbook 'sysctl'
 cookbook 'hostname'
 
 group :wrapper do
