@@ -1,3 +1,4 @@
+default['network']['enable_arp_filter'] = true
 default['chefserver']['ip'] = '127.0.0.1'
 default['chefserver']['hostname'] = 'chefserver.examplewebsite.com'
 default['authorization']['sudo']['groups'] = ['admin']

@@ -1,3 +1,5 @@
+include_recipe 'w_common::network'
+
 # php-dev, percona related packages and some other package needs latest updated packages
 include_recipe 'apt'
 
