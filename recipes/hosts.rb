@@ -37,6 +37,7 @@ node['w_common']['web_apps'].each do |web_app|
     end
   end
 
+  next unless web_app['connection_domain'].has_key?('db_domain')
   db_ips.each_with_index do |db_ip, index|
     domain = index.to_s + web_app['connection_domain']['db_domain']
     hostsfile_entry "#{db_ip} for #{web_app['vhost']['main_domain']}" do
