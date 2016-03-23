@@ -28,10 +28,9 @@ end
 node['w_common']['web_apps'].each do |web_app|
   next unless web_app.has_key?('connection_domain')
   webapp_ips.each_with_index do |webapp_ip, index|
-    domain = index.to_s + web_app['connection_domain']['webapp_domain']
     hostsfile_entry "#{webapp_ip} for #{web_app['vhost']['main_domain']}" do
       ip_address webapp_ip
-      hostname domain
+      hostname "#{index}#{web_app['connection_domain']['webapp_domain']}"
       action :append
       unique true
     end
@@ -39,10 +38,9 @@ node['w_common']['web_apps'].each do |web_app|
 
   next unless web_app['connection_domain'].has_key?('db_domain')
   db_ips.each_with_index do |db_ip, index|
-    domain = index.to_s + web_app['connection_domain']['db_domain']
     hostsfile_entry "#{db_ip} for #{web_app['vhost']['main_domain']}" do
       ip_address db_ip
-      hostname domain
+      hostname "#{index}#{web_app['connection_domain']['db_domain']}"
       action :append
       unique true
     end
