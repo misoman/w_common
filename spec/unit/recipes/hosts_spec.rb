@@ -34,6 +34,7 @@ describe 'w_common::hosts' do
       expect(chef_run).to append_hostsfile_entry('2.2.2.2 for example2.com').with(ip_address: '2.2.2.2', hostname: '0db.example.com').with_unique(true)
       expect(chef_run).to append_hostsfile_entry('1.1.1.1 for example3.com').with(ip_address: '1.1.1.1', hostname: '0webapp.example.com').with_unique(true)
       expect(chef_run).to append_hostsfile_entry('2.2.2.2 for example3.com').with(ip_address: '2.2.2.2', hostname: '0db.example.com').with_unique(true)
+      expect(chef_run).to append_hostsfile_entry('1.1.1.1 for apache_and_varnish_only.com').with(ip_address: '1.1.1.1', hostname: '0webapp.apache_and_varnish_only.com').with_unique(true)
       expect(chef_run).to append_hostsfile_entry('127.0.0.1').with_hostname('localhost').with_unique(true)
     end
   end

@@ -14,6 +14,7 @@ cookbook 'timezone-ii'
 cookbook 'windows', git: 'https://github.com/opscode-cookbooks/windows.git', ref: '0dae7405020b1521b61170267fdeedc022c3a448'
 cookbook 'sysctl'
 cookbook 'hostname'
+cookbook 'newrelic', '~> 2.18.0'
 
 group :wrapper do
   cookbook 'w_common', path: './'
