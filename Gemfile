@@ -1,21 +1,18 @@
 source 'https://rubygems.org'
 
-chef_version = ENV.fetch("CHEF_VERSION", "12.6.0")
-
-gem "chef", "~> #{chef_version}"
+gem 'chef', '12.13.37'
 gem 'chefspec'
 gem 'chef-zero'
-gem 'chef-sugar'
-gem 'berkshelf'
+gem 'berkshelf', '~> 4.3.5'
 gem 'foodcritic'
 gem 'rake'
-gem 'rubocop'
-gem 'byebug'
+gem 'coveralls', require: false
+gem 'ffi-yajl', '~> 2.2.3'
+gem "chef-sugar"
 
 group :integration do
   gem 'serverspec'
   gem 'kitchen-vagrant'
   gem 'vagrant-wrapper'
-  gem 'kitchen-sync'
-  gem 'test-kitchen'
+  gem 'test-kitchen', '~> 1.11.1'
 end
