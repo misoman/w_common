@@ -8,8 +8,9 @@ package 'bash' do
   action :upgrade
 end
 
-package 'curl'
-package 'telnet'
+%w(curl telnet apt-show-versions).each do |name|
+  package name
+end
 
 include_recipe 'sudo'
 include_recipe 'hostname'

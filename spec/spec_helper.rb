@@ -1,6 +1,8 @@
 require 'chefspec'
 require 'chefspec/berkshelf'
 require 'mymatchers'
+require 'coveralls'
+Coveralls.wear!
 
 ChefSpec::Coverage.start! do
   add_filter(%r{[\/\\]ntp[\/\\]})
@@ -10,7 +12,6 @@ ChefSpec::Coverage.start! do
   add_filter(%r{[\/\\]monit[\/\\]})
   add_filter(%r{[\/\\]build-essential[\/\\]})
   add_filter(%r{[\/\\]git[\/\\]})
-  add_filter(%r{[\/\\]apt-repo[\/\\]})
   add_filter(%r{[\/\\]hostname[\/\\]})
   add_filter(%r{[\/\\]firewall[\/\\]})
   add_filter(%r{[\/\\]chef-sugar[\/\\]})
@@ -21,6 +22,7 @@ ChefSpec::Coverage.start! do
 RSpec.configure do |config|
   config.platform = 'ubuntu'
   config.version = '14.04'
+  config.log_level = :error
 end
 
 def web_apps
