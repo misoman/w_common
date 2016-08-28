@@ -2,6 +2,7 @@ w_common Cookbook
 ==================
 
 [![Build Status](https://travis-ci.org/haapp/w_common.svg?branch=master)](https://travis-ci.org/haapp/w_common)
+[![Coverage Status](https://coveralls.io/repos/github/haapp/w_common/badge.svg?branch=master)](https://coveralls.io/github/haapp/w_common?branch=master)
 
 Chef cookbook to instal and configure common packages and configurations among multiple kinds of high availability application stack virtual machines.
 
