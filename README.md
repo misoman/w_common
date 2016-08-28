@@ -8,16 +8,13 @@ Chef cookbook to instal and configure common packages and configurations among m
 Requirements
 ------------
 Cookbook Dependency:
-* ubuntu
 * apt
-* apt-repo
 * git
 * monit
 * firewall
 * ntp
 * sudo
 * timezone-ii
-* windows
 * hostname
 
 Supported Platform:
@@ -58,6 +55,6 @@ bundle exec kithen test
 
 License and Authors
 -------------------
-Authors: 
-* Joel Handwell @joelhandwell 
+Authors:
+* Joel Handwell @joelhandwell
 * Full Of Lilies @fulloflilies

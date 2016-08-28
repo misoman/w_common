@@ -4,23 +4,11 @@ describe 'w_common::default' do
 
   context 'default' do
 
-    let(:bash_code) do
- <<-EOH
-      apt-get update
-      touch #{first_run_file}
- EOH
-    end
-
-    let(:first_run_file) do
-      '/var/chef/cache/apt_compile_time_update_first_run'
-    end
-
     let(:chef_run) do
       ChefSpec::SoloRunner.new(file_cache_path: '/var/chef/cache') do |node|
         node.set['tz'] = 'America/Los_Angeles'
         node.name 'node1'
         node.set['set_fqdn'] = '*.examplewebsite.com'
-        node.set['apt']['compile_time_update'] = true
         node.set['firewall']['allow_ssh'] = true
         node.set['monit_enabled'] = true
         node.set['w_common']['web_apps'] = web_apps
@@ -46,28 +34,17 @@ describe 'w_common::default' do
     end
 
     it 'excute apt-get update' do
-      allow(File).to receive(:executable?).and_call_original
-      allow(File).to receive(:executable?).with('/usr/bin/apt-get').and_return(true)
-      allow(File).to receive(:exist?).and_call_original
-      allow(File).to receive(:exist?).with('/var/lib/apt/periodic/update-success-stamp').and_return(false)
-      allow(File).to receive(:exist?).with('/var/chef/cache/apt_compile_time_update_first_run').and_return(true)
       expect(chef_run).to include_recipe('apt')
-      expect(chef_run).to run_bash('apt-get-update at compile time').with(
-        code: bash_code,
-        ignore_failure: true
-      ).at_compile_time
     end
 
     it 'upgrads bash' do
       expect(chef_run).to upgrade_package('bash')
     end
 
-    it 'installs curl' do
-      expect(chef_run).to install_package('curl')
-    end
-
-    it 'installs telnet' do
-      expect(chef_run).to install_package('telnet')
+    %w(curl telnet apt-show-versions).each do |name|
+      it "install #{name}" do
+        expect(chef_run).to install_package(name)
+      end
     end
 
     it 'configures sudo' do
